@@ -3,17 +3,27 @@ import Todos from './Todos';
 import AddTodo from './AddTodo';
 class App extends Component {
   state = {
-    todos :[
-      {id:1, content: 'Buy some milk'},
-      {id:2, content: 'Buy tea'}
+    todos :[''
     ]
   }
+   //fetch data from our api
+   componentDidMount(){
+    fetch('/api')
+    .then( res => res.json())
+    .then(todos => this.setState({todos}, ()=> console.log(todos)));
+ }
 //functions
-deleteTodo = (id)=>{
-  console.log(id);
+deleteTodo = (_id)=>{
   const todos = this.state.todos.filter(todo =>{
-    return todo.id !== id;
+    return todo._id !== _id;
   })
+  //fetch to delete from data base
+  fetch('/'+_id, {
+    method: 'DELETE'
+  })
+  .then((data)=>{console.log('removed from the database')})
+  .catch(err=> console.log(err));
+  //setting the updated state
   this.setState({todos});
 }
 //function to add new item to the list
