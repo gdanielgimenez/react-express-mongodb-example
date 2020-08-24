@@ -9,9 +9,7 @@ handleChange = (e) =>{
     })
 }
 handleSubmit = (e)=>{
-   // e.preventDefault();
     this.props.addTodo(this.state);
-    //this.setState({ content:''})
 }
 
 
@@ -20,7 +18,7 @@ handleSubmit = (e)=>{
         <div>
             <form action="/api" method="POST" onSubmit={this.handleSubmit}>
                 <label> add new item to the list :</label>
-                <input type="text" name="content" onChange={this.handleChange} value ={this.state.content}/>
+                <input type="text" name="content" onChange={this.handleChange} />
             </form>
         </div>
     )

@@ -5,12 +5,12 @@ const Todo = require('./todo');
 const app = express();
 // connect to database
 mongoose.connect('mongodb://localhost:27017/testReact', {useNewUrlParser: true})
-.then((result)=> console.log('connected to dataBase'))
+.then((result)=> console.log('connected to dataBase'), app.listen(5000, ()=> console.log('listening for requests on port 5000')))
 .catch((err)=> console.log(err));
 //middleware
 app.use(express.urlencoded ({extended: true}));
 //listen for requests
-app.listen(5000, ()=> console.log('listening for requests on port 5000'));
+
 //response to requests GET
 app.get('/api', (req,res)=>{
     Todo.find()
